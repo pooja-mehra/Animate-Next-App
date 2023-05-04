@@ -33,8 +33,8 @@ export default function SearchTerm (initialData:any){
 
 export async  function getServerSideProps(context:any){
     const searchTerm = context.query.searchTerm
-    console.log(searchTerm)
+    let giphyObject = {data:[],pagination:{},meta:{}}
     let giphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=StSxYeS5s923lQPhbYX9cZwplIcPUKrm&limit=10`)
-    giphys = await giphys.json()
-    return {props: {giphys: giphys.data}} 
+    giphyObject = await giphys.json()
+    return {props: {giphys: giphyObject.data}} 
 }

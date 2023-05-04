@@ -30,11 +30,13 @@ export default function Home(initialData:any) {
   }
 
   const searchTermFun = async (formInputs:any) =>{
+    let giphyObject = {data:[],pagination:{},meta:{}}
     console.log(formInputs.searchTerm)
     if(formInputs.searchTerm != searchTerm){
       let giphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${formInputs.searchTerm}&api_key=StSxYeS5s923lQPhbYX9cZwplIcPUKrm&limit=6`)
-      giphys = await giphys.json()
-      setSearchResults(giphys.data)
+      giphyObject = await giphys.json()
+      console.log(giphyObject)
+      setSearchResults(giphyObject.data)
       setSearchTerm(formInputs.searchTerm)
       console.log(searchResults)
       
